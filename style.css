@@ -1,0 +1,285 @@
+/* RESET BÁSICO */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    background-color: #f4f7f6;
+    color: #333;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* HEADER & FOOTER */
+.site-header, .site-footer {
+    background-color: #861d1d;
+    color: #ecf0f1;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+.site-header {
+    /* Mantenha o background-color e padding existentes */
+    background-color: #861d1d;
+    padding: 1rem 0;
+    text-align: center; /* Já deve estar lá, garante que a imagem fique centralizada */
+    display: flex; /* Adicionado para facilitar o alinhamento da imagem */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente (se houver padding) */
+    min-height: 80px; /* Adicione uma altura mínima para o cabeçalho se a imagem for pequena */
+}
+
+.header-logo {
+    max-width: 250px; /* Defina a largura máxima da sua imagem */
+    height: auto; /* Mantém a proporção da imagem */
+    display: block; /* Remove espaços extras se houver */
+    margin: 0 auto; /* Garante centralização horizontal */
+    padding: 10px 0; /* Adiciona um pouco de espaço vertical dentro do header */
+}
+
+/* Opcional: Ajuste para telas menores */
+@media (max-width: 768px) {
+    .header-logo {
+        max-width: 200px; /* Ajuste para telas menores se necessário */
+    }
+}
+
+.site-footer p {
+    font-size: 0.9rem;
+}
+
+/* SLIDER LAYOUT */
+.slider-wrapper {
+    flex-grow: 1; /* Permite que o wrapper ocupe o espaço restante */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 1rem; /* Adiciona padding para telas menores */
+}
+
+.slider-container {
+    position: relative;
+    width: 100%;
+    max-width: 900px; /* Largura máxima para desktops */
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Garante que o conteúdo não vaze */
+    aspect-ratio: 16 / 9; /* Mantém proporção 16:9 */
+}
+
+.slider-images {
+    display: flex;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Curva de transição mais suave */
+    height: 100%; /* Ocupa toda a altura do container */
+}
+
+.slider-item {
+    min-width: 100%; /* Garante que cada item ocupe 100% da largura */
+    position: relative;
+    display: flex; /* Para centralizar o conteúdo da imagem/legenda */
+    flex-direction: column;
+    justify-content: flex-end; /* Alinha a legenda na parte inferior */
+    height: 100%;
+}
+
+.slider-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Recorta a imagem para preencher sem distorcer */
+    display: block;
+    position: absolute; /* Permite que a legenda flutue sobre */
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.slider-caption {
+    position: relative; /* Para ficar acima da imagem */
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    padding: 1.25rem 1.5rem;
+    text-align: center;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.slider-caption h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.slider-caption p {
+    margin: 0;
+    font-size: 1rem;
+    color: #c0c0c0;
+}
+
+/* SLIDER BUTTONS (PREV/NEXT) */
+.slider-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(44, 62, 80, 0.7); /* Cor dos botões mais escura */
+    color: white;
+    border: none;
+    padding: 1rem;
+    cursor: pointer;
+    font-size: 1.8rem;
+    border-radius: 50%; /* Botões circulares */
+    width: 50px; /* Largura e altura para fazer um círculo */
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.slider-button:hover {
+    background-color: rgba(44, 62, 80, 0.9);
+    transform: translateY(-50%) scale(1.05); /* Pequeno efeito de zoom no hover */
+}
+
+.slider-button:active {
+    transform: translateY(-50%) scale(0.98); /* Efeito de clique */
+}
+
+.slider-button--prev {
+    left: 15px;
+}
+
+.slider-button--next {
+    right: 15px;
+}
+
+.slider-button svg {
+    width: 28px;
+    height: 28px;
+    fill: currentColor; /* Usa a cor do texto do botão */
+}
+
+/* SLIDER DOTS */
+.slider-dots {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.dot {
+    width: 14px;
+    height: 14px;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+.dot.active {
+    background-color: #861d1d; /* Cor de destaque para o dot ativo */
+    border-color: #515151;
+    transform: scale(1.2); /* Dot ativo um pouco maior */
+}
+
+.dot:hover:not(.active) {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+/* CLASSES DE UTILIDADE */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 768px) {
+    .site-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .slider-container {
+        border-radius: 0; /* Remover borda arredondada em telas pequenas */
+        box-shadow: none;
+    }
+
+    .slider-caption h3 {
+        font-size: 1.4rem;
+    }
+
+    .slider-caption p {
+        font-size: 0.85rem;
+    }
+
+    .slider-button {
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+    }
+
+    .slider-button svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .slider-button--prev {
+        left: 5px;
+    }
+
+    .slider-button--next {
+        right: 5px;
+    }
+
+    .slider-dots {
+        bottom: 10px;
+        gap: 8px;
+    }
+
+    .dot {
+        width: 10px;
+        height: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .site-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .slider-caption {
+        padding: 1rem;
+    }
+
+    .slider-caption h3 {
+        font-size: 1.2rem;
+    }
+
+    .slider-caption p {
+        font-size: 0.8rem;
+    }
+}
+
+.error-message {
+    text-align: center;
+    color: #c0392b; /* Uma cor de erro, como vermelho escuro */
+    padding: 20px;
+    font-size: 1.1em;
+}
