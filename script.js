@@ -35,17 +35,18 @@ class ImageSlider {
 
     async fetchPhotos() {
         try {
-            // CORREÇÃO: A URL deve ser uma string entre aspas.
-            const response = await fetch('https://fotos-senai-back.onrender.com/fotos');
+            const response = await fetch(this.jsonServerUrl);
             if (!response.ok) {
+                // Lança um erro se a resposta HTTP não for bem-sucedida
                 throw new Error(`HTTP error! status: ${response.status} - ${response.statusText}`);
             }
             this.photos = await response.json();
         } catch (error) {
             console.error('Erro ao buscar fotos:', error);
-            this.photos = [];
+            this.photos = []; // Garante que o array de fotos esteja vazio em caso de erro
         }
     }
+
     renderSlider() {
         this.sliderImagesContainer.innerHTML = ''; // Limpa o conteúdo existente
         this.photos.forEach((photo, index) => {
