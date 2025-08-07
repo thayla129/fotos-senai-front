@@ -35,7 +35,7 @@ class ImageSlider {
 
     async fetchPhotos() {
         try {
-            const response = await fetch(this.jsonServerUrl);
+            const response = await fetch(fotos-senai-back.onrender.com/fotos);
             if (!response.ok) {
                 // Lança um erro se a resposta HTTP não for bem-sucedida
                 throw new Error(`HTTP error! status: ${response.status} - ${response.statusText}`);
