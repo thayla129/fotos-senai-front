@@ -37,15 +37,15 @@ class ImageSlider {
         try {
             const response = await fetch(this.jsonServerUrl);
             if (!response.ok) {
-                // Lança um erro se a resposta HTTP não for bem-sucedida
                 throw new Error(`HTTP error! status: ${response.status} - ${response.statusText}`);
             }
             this.photos = await response.json();
         } catch (error) {
             console.error('Erro ao buscar fotos:', error);
-            this.photos = []; // Garante que o array de fotos esteja vazio em caso de erro
+            this.photos = [];
         }
     }
+    
 
     renderSlider() {
         this.sliderImagesContainer.innerHTML = ''; // Limpa o conteúdo existente
@@ -192,8 +192,8 @@ class ImageSlider {
 // Inicializa o slider quando o DOM estiver completamente carregado
 document.addEventListener('DOMContentLoaded', () => {
     // URL do seu JSON Server. Certifique-se de que ele está rodando!
-    const jsonServerBaseUrl = 'https://fotos-senai-back.onrender.com/fotos';
-    const jsonServerEndpoint = `${jsonServerBaseUrl}/fotos`;
+    const jsonServerEndpoint = 'https://fotos-senai-back.onrender.com/fotos';
+
 
     new ImageSlider({
         sliderImagesId: 'sliderImages',
